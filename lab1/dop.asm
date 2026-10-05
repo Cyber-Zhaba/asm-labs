@@ -10,9 +10,11 @@
 
   digits db '0123456789ABCDEF'
 
+  hexcom db 'HEX: $'
   bufhex db '####'
   bufhexend db '$'
 
+  deccom db 'DEC: $'
   bufdec db '@@@@@'
   bufdecend db '$'
 
@@ -73,14 +75,18 @@ start:
 
   ;; 1.2 выводрим буфер
   mov ah, 09h
+  lea dx, hexcom
+  int 21h
   lea dx, bufhex
   int 21h
 
+  ;; newline
   mov ah, 02h
   mov dl, 0Dh
   int 21h
   mov dl, 0Ah
   int 21h
+  ;; newline
 
   ;; 2. DEC
   ;; 2.1 подготовим буфер
@@ -101,14 +107,18 @@ dec_loop:
 ;; dec_loop
 
   mov ah, 09h
+  lea dx, deccom
+  int 21h
   lea dx, bufdec[si+1]
   int 21h
 
+  ;; newline
   mov ah, 02h
   mov dl, 0Dh
   int 21h
   mov dl, 0Ah
   int 21h
+  ;; newline
 
   mov ax, 4C00h
   int 21h
