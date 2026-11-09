@@ -29,7 +29,7 @@ DEF macro X, T, N, V
   endif
 
   ifdef X
-    %out X alredy defined
+    %out X already defined
     .err
     exitm
   endif
